@@ -3,6 +3,7 @@ using UnityEngine;
 public class player_movement : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public BoxCollider2D bc;
     public float moveDirectionX=0;
     public float moveDirectionY=0;
     public float moveSpeed = 5;
@@ -21,12 +22,27 @@ public class player_movement : MonoBehaviour
     public int currentNumberJumps = 0;
 
     public bool isFacingRight = false;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public VoidEventChannel onPlayerDeath;
+
+    private void OnEnable(){
+        onPlayerDeath.OnEventRaised += Die;
+    }
+
+    private void OnDisable() {
+        onPlayerDeath.OnEventRaised -= Die;
+    }
+
     void Start()
     {
         
     }
 
+    void Die(){
+        rb.bodyType = RigidbodyType2D.Static;
+        bc.enabled = false;
+        enabled=false;
+    }
     // Update is called once per frame
     void Update()
     {

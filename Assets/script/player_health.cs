@@ -9,6 +9,8 @@ public class player_health : MonoBehaviour
     public float invulnerableTime = 1.5f;
     public float invulnerableFlash = 0.2f;
     public SpriteRenderer sr;
+
+    public VoidEventChannel onPlayerDeath;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,7 +23,7 @@ public class player_health : MonoBehaviour
         }
         dataPlayer.CurrentLifePoint = dataPlayer.CurrentLifePoint - damage;
         if (dataPlayer.CurrentLifePoint <=0){
-            Destroy(GameObject.FindWithTag("Player"));
+            onPlayerDeath.Raise();
         } else {
             StartCoroutine(Invulnerable());
         }

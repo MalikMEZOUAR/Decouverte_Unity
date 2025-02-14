@@ -284,3 +284,4 @@ MonoBehaviour:
     m_Bits: 8
   groundCheckRadius: 0.15
   isFacingRight: 0
+  distanceDetection: 0.75
