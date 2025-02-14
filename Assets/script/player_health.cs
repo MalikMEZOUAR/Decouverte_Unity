@@ -4,8 +4,7 @@ using System.Collections;
 public class player_health : MonoBehaviour
 {
 
-    public int maxLifePoint = 50;
-    public int CurrentLifePoint = 50;
+    public PlayerData dataPlayer;
     public bool isInvulnerable = false;
     public float invulnerableTime = 1.5f;
     public float invulnerableFlash = 0.2f;
@@ -13,15 +12,15 @@ public class player_health : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        CurrentLifePoint = maxLifePoint;
+        dataPlayer.CurrentLifePoint = dataPlayer.maxLifePoint;
     }
 
-    public void hurt(int damage = 5){
+    public void hurt(int damage = 1){
         if(isInvulnerable){
             return;
         }
-        CurrentLifePoint = CurrentLifePoint - damage;
-        if (CurrentLifePoint <=0){
+        dataPlayer.CurrentLifePoint = dataPlayer.CurrentLifePoint - damage;
+        if (dataPlayer.CurrentLifePoint <=0){
             Destroy(GameObject.FindWithTag("Player"));
         } else {
             StartCoroutine(Invulnerable());

@@ -924,8 +924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9be76ce4a4f2cd4ebc28859fe940163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLifePoint: 50
-  CurrentLifePoint: 50
+  dataPlayer: {fileID: 0}
   isInvulnerable: 0
   invulnerableTime: 1.5
   invulnerableFlash: 0.4
@@ -1428,6 +1427,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 7534382293494233105, guid: 3b9cf66aa98aca4419fa92b5f074843e, type: 3}
+      propertyPath: dataPlayer
+      value: 
+      objectReference: {fileID: 11400000, guid: 0dd9b92e8ee01764fa6e46bff9b508b7, type: 2}
     - target: {fileID: 7534382293494233105, guid: 3b9cf66aa98aca4419fa92b5f074843e, type: 3}
       propertyPath: healthPlayer
       value: 
