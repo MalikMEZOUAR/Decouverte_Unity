@@ -3,6 +3,8 @@ using UnityEngine;
 public class player_movement : MonoBehaviour
 {
     public Rigidbody2D rb;
+
+    public Animator animator;
     public BoxCollider2D bc;
     public float moveDirectionX=0;
     public float moveDirectionY=0;
@@ -62,10 +64,16 @@ public class player_movement : MonoBehaviour
         if(isGamePaused){
             return;
         }
+        animator.SetFloat("VelocityX", Mathf.Abs(rb.linearVelocityX));
+        animator.SetFloat("VelocityY", rb.linearVelocityY);
+        animator.SetBool("IsGrounded", isGrounded);
         moveDirectionX = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump") && currentNumberJumps < maxAllowedJumps){
             Jump();
             currentNumberJumps++;
+            if(currentNumberJumps > 1){
+                animator.SetTrigger("DoubleJump");
+            }
         }
         if (isGrounded && !Input.GetButton("Jump")){
         currentNumberJumps = 0;

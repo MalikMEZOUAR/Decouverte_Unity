@@ -5,6 +5,7 @@ public class ennemy_Patrol : MonoBehaviour
     public Rigidbody2D rb;
     public float moveSpeed = 3;
     public BoxCollider2D bc;
+    public Animator animator;
     public LayerMask listObstacleLayers;
     public float groundCheckRadius = 0.15f;
     public bool isFacingRight = false;
@@ -14,6 +15,7 @@ public class ennemy_Patrol : MonoBehaviour
         if(rb.linearVelocity.y !=0){
             return; 
         }
+        animator.SetFloat("VelocityX", Mathf.Abs(rb.linearVelocityX));
         rb.linearVelocity = new Vector2(
             moveSpeed * transform.right.normalized.x,
             rb.linearVelocity.y
