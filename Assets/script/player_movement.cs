@@ -21,16 +21,23 @@ public class player_movement : MonoBehaviour
 
     public int currentNumberJumps = 0;
 
-    public bool isFacingRight = false;
+    public bool isFacingRight = true;
+    public bool isGamePaused = false;
 
     public VoidEventChannel onPlayerDeath;
+    public VoidEventChannel onGameResume;
+    public VoidEventChannel onGamePause;
 
     private void OnEnable(){
         onPlayerDeath.OnEventRaised += Die;
+        onGamePause.OnEventRaised += OnPause;
+        onGameResume.OnEventRaised += OnResume;
     }
 
     private void OnDisable() {
         onPlayerDeath.OnEventRaised -= Die;
+        onGamePause.OnEventRaised -= OnPause;
+        onGameResume.OnEventRaised -= OnResume;
     }
 
     void Start()
@@ -38,6 +45,12 @@ public class player_movement : MonoBehaviour
         
     }
 
+    public void OnPause(){
+        isGamePaused=true;
+    }
+    public void OnResume(){
+        isGamePaused=false;
+    }
     void Die(){
         rb.bodyType = RigidbodyType2D.Static;
         bc.enabled = false;
@@ -46,6 +59,9 @@ public class player_movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isGamePaused){
+            return;
+        }
         moveDirectionX = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump") && currentNumberJumps < maxAllowedJumps){
             Jump();
